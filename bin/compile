@@ -1,0 +1,16 @@
+#!/bin/sh
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+echo "-----> Found a backup.txt"
+
+# if hello.txt is empty, abort the build
+if [ ! -s $1/backup.txt ]; then
+  echo "backup.txt was empty" | indent
+  exit 1
+fi
+
+# replace hello with goodbye in a new file
+cat $1/backup.txt | sed -e "s/[bB]ackup/Done/g" > $1/result.txt
