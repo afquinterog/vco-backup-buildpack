@@ -4,13 +4,17 @@ indent() {
   sed -u 's/^/       /'
 }
 
-echo "-----> Found a backup.txt"
+echo "-----> Found a vco-backup"
 
 # if hello.txt is empty, abort the build
-if [ ! -s $1/backup.txt ]; then
-  echo "backup.txt was empty" | indent
+if [ ! -s $1/vco-backup ]; then
+  echo "vco-backup was empty" | indent
   exit 1
 fi
 
-# replace hello with goodbye in a new file
-cat $1/backup.txt | sed -e "s/[bB]ackup/Done/g" > $1/result.txt
+
+#get file name from vco-backup
+FILE_NAME="`cat $1/vco-backup`"
+
+#compress actual code
+tar -cvzf ${FILE_NAME} .
