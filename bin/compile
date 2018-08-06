@@ -17,4 +17,6 @@ fi
 FILE_NAME="`cat $1/vco-backup`"
 
 #compress actual code
-tar -cvzf ${FILE_NAME}.tgz .
+tar -cvzf ${FILE_NAME}.tgz /tmp
+
+mv /tmp/${FILE_NAME}.tgz .
