@@ -43,3 +43,6 @@ chmod +x $BUILD_DIR/.profile.d/install_awscli.sh
 rm -rf /tmp/awscli*
 
 echo "-----> aws cli installation done"
+
+
+echo /app/vendor/awscli/bin/aws --version
