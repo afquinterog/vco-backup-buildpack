@@ -1,9 +1,12 @@
 #!/bin/sh
 
 # this pack is valid for apps with a hello.txt in the root
-if [ -f $1/vco-backup ]; then
-  echo "VentureBackupAddOn"
-  exit 0
-else
-  exit 1
-fi
+# if [ -f $1/vco-backup ]; then
+#   echo "VentureBackupAddOn"
+#   exit 0
+# else
+#   exit 1
+# fi
+
+# Don't need to detect will apply to any application that add the buildpack
+exit 0

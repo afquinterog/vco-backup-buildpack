@@ -1,16 +1,14 @@
 #!/bin/sh
 
+set -e
+
 indent() {
   sed -u 's/^/       /'
 }
 
-echo "-----> Found a vco-backup"
+echo "-----> Found add-on vco-backup"
 
-# if hello.txt is empty, abort the build
-if [ ! -s $1/vco-backup ]; then
-  echo "vco-backup was empty" | indent
-  exit 1
-fi
+
 
 
 #get file name from vco-backup
@@ -20,3 +18,6 @@ FILE_NAME="`cat $1/vco-backup`"
 tar -cvzf /tmp/${FILE_NAME}.tgz $1
 
 mv /tmp/${FILE_NAME}.tgz $1
+
+#install awscli
+pip install awscli --upgrade --user
