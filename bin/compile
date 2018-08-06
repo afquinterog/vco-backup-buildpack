@@ -1,6 +1,8 @@
 #!/bin/sh
 
 set -e
+unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
+
 
 indent() {
   sed -u 's/^/       /'
@@ -19,29 +21,13 @@ tar -cvzf /tmp/${FILE_NAME}.tgz $1
 
 mv /tmp/${FILE_NAME}.tgz $1
 
-#install awscli
-# config
-AWS_CLI_URL="https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
 
-# parse and derive params
-BUILD_DIR=$1
-CACHE_DIR=$2
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+LOG_FILE='/tmp/node-build-log.txt'
 
-LP_DIR=`cd $(dirname $0); cd ..; pwd`
-BUILDPACK_DIR="$(dirname $(dirname $0))"
+echo "Add ${BUILD_DIR}"
 
-echo "-----> Fetching AWS CLI into slug"
-curl --progress-bar -o /tmp/awscli-bundle.zip $AWS_CLI_URL
-unzip -qq -d "$BUILD_DIR/vendor" /tmp/awscli-bundle.zip
 
-echo "-----> adding installer script into app/.profile.d"
-mkdir -p $BUILD_DIR/.profile.d
-cp "$BUILDPACK_DIR/bin/install_awscli.sh" $BUILD_DIR/.profile.d/
-chmod +x $BUILD_DIR/.profile.d/install_awscli.sh
-
-#cleaning up...
-rm -rf /tmp/awscli*
-
-echo "-----> aws cli installation done"
-
-exec /app/vendor/awscli/bin/aws --version
