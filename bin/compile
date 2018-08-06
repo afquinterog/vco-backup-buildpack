@@ -44,5 +44,4 @@ rm -rf /tmp/awscli*
 
 echo "-----> aws cli installation done"
 
-
-echo /app/vendor/awscli/bin/aws --version
+/app/vendor/awscli/bin/aws --version
