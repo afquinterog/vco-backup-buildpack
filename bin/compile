@@ -29,5 +29,9 @@ BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 LOG_FILE='/tmp/node-build-log.txt'
 
 echo "Build dir: ${BUILD_DIR}"
+echo "Cache dir: ${CACHE_DIR}"
+echo "Env dir: ${ENV_DIR}"
+echo "BP dir: ${BP_DIR}"
+
 
 
