@@ -20,4 +20,26 @@ tar -cvzf /tmp/${FILE_NAME}.tgz $1
 mv /tmp/${FILE_NAME}.tgz $1
 
 #install awscli
-pip install awscli --upgrade --user
+# config
+AWS_CLI_URL="https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+BUILDPACK_DIR="$(dirname $(dirname $0))"
+
+echo "-----> Fetching AWS CLI into slug"
+curl --progress-bar -o /tmp/awscli-bundle.zip $AWS_CLI_URL
+unzip -qq -d "$BUILD_DIR/vendor" /tmp/awscli-bundle.zip
+
+echo "-----> adding installer script into app/.profile.d"
+mkdir -p $BUILD_DIR/.profile.d
+cp "$BUILDPACK_DIR/bin/install_awscli.sh" $BUILD_DIR/.profile.d/
+chmod +x $BUILD_DIR/.profile.d/install_awscli.sh
+
+#cleaning up...
+rm -rf /tmp/awscli*
+
+echo "-----> aws cli installation done"
