@@ -17,12 +17,16 @@ echo "-----> Found add-on vco-backup"
 
 
 #get file name from vco-backup
-FILE_NAME="`cat $1/vco-backup`"
+#FILE_NAME="`cat $1/vco-backup`"
 
 #compress actual code
 #tar -cvzf /tmp/${FILE_NAME}.tgz $1
 
 #mv /tmp/${FILE_NAME}.tgz $1
+#
+
+echo "dataToBackup" > backup/data.txt
+ls backup
 
 
 
