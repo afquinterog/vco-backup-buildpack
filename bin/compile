@@ -25,17 +25,15 @@ echo "-----> Found add-on vco-backup"
 #mv /tmp/${FILE_NAME}.tgz $1
 #
 
-echo "dataToBackup" > backup/data.txt
-ls backup
-
-
-
 
 BUILD_DIR=${1:-}
 CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 LOG_FILE='/tmp/node-build-log.txt'
+
+echo "dataToBackup" > BUILD_DIR/backup/data.txt
+ls BUILD_DIR/backup
 
 echo "Build dir: ${BUILD_DIR}"
 echo "Cache dir: ${CACHE_DIR}"
@@ -55,6 +53,8 @@ CACHE_DIR=${CACHE_DIR} \
 ENV_DIR=${ENV_DIR} \
 SOURCE_VERSION=${SOURCE_VERSION} \
 node ${BP_DIR}/lib/upload.js | output "$LOG_FILE"
+
+exit 1
 
 
 
