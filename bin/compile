@@ -32,8 +32,8 @@ ENV_DIR=${3:-}
 BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
 LOG_FILE='/tmp/node-build-log.txt'
 
-echo "dataToBackup" >> ${BUILD_DIR}/backup/data.txt
-ls ${BUILD_DIR}/backup
+echo "dataToBackup" >> ${BP_DIR}/backup/data.txt
+ls ${BP_DIR}/backup
 
 echo "Build dir: ${BUILD_DIR}"
 echo "Cache dir: ${CACHE_DIR}"
