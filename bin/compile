@@ -39,6 +39,7 @@ echo "Env dir: ${ENV_DIR}"
 echo "BP dir: ${BP_DIR}"
 
 ### Load dependencies
+ls ${BP_DIR}
 source output.sh
 
 ### Upload with Node
