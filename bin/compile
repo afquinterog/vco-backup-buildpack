@@ -40,7 +40,7 @@ echo "BP dir: ${BP_DIR}"
 
 ### Load dependencies
 ls ${BP_DIR}
-source output.sh
+source ${BP_DIR}/lib/output.sh
 
 ### Upload with Node
 npm install | output "$LOG_FILE"
