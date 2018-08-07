@@ -38,7 +38,7 @@ echo "Env dir: ${ENV_DIR}"
 echo "BP dir: ${BP_DIR}"
 
 ### Load dependencies
-source ${BP_DIR}/output.sh
+source output.sh
 
 ### Upload with Node
 npm install | output "$LOG_FILE"
