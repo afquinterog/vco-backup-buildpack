@@ -6,6 +6,12 @@ unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
 set -o errexit    # always exit on error
 set -o nounset    # fail on unset variables
 
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
+LOG_FILE='/tmp/node-build-log.txt'
+
 
 indent() {
   sed -u 's/^/       /'
@@ -13,41 +19,19 @@ indent() {
 
 echo "-----> Found add-on vco-backup"
 
-
-
-
-#get file name from vco-backup
-#FILE_NAME="`cat $1/vco-backup`"
-
 #compress actual code
-#tar -cvzf /tmp/${FILE_NAME}.tgz $1
-
-#mv /tmp/${FILE_NAME}.tgz $1
-#
-
-
-BUILD_DIR=${1:-}
-CACHE_DIR=${2:-}
-ENV_DIR=${3:-}
-BP_DIR=$(cd $(dirname ${0:-}); cd ..; pwd)
-LOG_FILE='/tmp/node-build-log.txt'
-
+tar -cvzf /tmp/backup.tgz $1
 mkdir ${BUILD_DIR}/backup
-echo "dataToBackup" >> ${BUILD_DIR}/backup/data.txt
+mv /tmp/backup.tgz ${BUILD_DIR}/backup/
+
+#echo "dataToBackup" >> ${BUILD_DIR}/backup/data.txt
 ls ${BUILD_DIR}/backup
 
-echo "Build dir: ${BUILD_DIR}"
-echo "Cache dir: ${CACHE_DIR}"
-echo "Env dir: ${ENV_DIR}"
-echo "BP dir: ${BP_DIR}"
-
 ### Load dependencies
-ls ${BP_DIR}
 source ${BP_DIR}/lib/output.sh
 
-### Upload with Node
+### Install node dependencies
 npm install | output "$LOG_FILE"
-
 
 BUILD_DIR=${BUILD_DIR} \
 CACHE_DIR=${CACHE_DIR} \
