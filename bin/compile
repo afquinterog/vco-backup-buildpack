@@ -21,11 +21,14 @@ echo "-----> Found add-on vco-backup"
 
 #compress actual code
 tar -cvzf /tmp/backup.tgz $1 > /dev/null
+echo "create the dir"
 mkdir ${BUILD_DIR}/backup
+echo "move backup"
 mv /tmp/backup.tgz ${BUILD_DIR}/backup/
 
 #echo "dataToBackup" >> ${BUILD_DIR}/backup/data.txt
-ls ${BUILD_DIR}/backup
+echo "ls data"
+ls ${BUILD_DIR}/backup | indent
 
 ### Load dependencies
 source ${BP_DIR}/lib/output.sh
