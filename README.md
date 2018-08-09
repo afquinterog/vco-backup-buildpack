@@ -1,7 +1,19 @@
-Heroku buildpack: Hello
+VCO Venture Backup buildpack
 =======================
 
-This is an example [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks).
+This plugin allows to generate backups on S3 of applications being deployed to heroku.
+
+Requires the NodeJS buildpack to be installed. `https://github.com/heroku/heroku-buildpack-nodejs`
+
+# Setting Mandatory Environment Variables for Build
+Setting env var
+-----
+
+```
+VCO_BACKUPS_ACCESS_KEY_ID=<aws access key id>
+AWS_SECRET_ACCESS_KEY=<aws secret access key>
+AWS_DEFAULT_REGION=<aws-region>
+AWS_STATIC_BUCKET_NAME=<s3-bucket-name>
 
 Usage
 -----
