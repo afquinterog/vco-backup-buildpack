@@ -20,7 +20,7 @@ indent() {
 echo "-----> Found add-on vco-backup"
 
 #compress actual code
-tar -cvzf /tmp/backup.tgz $1 > /dev/null | indent
+tar -cvzf -P /tmp/backup.tgz $1 > /dev/null | indent
 echo "create the dir" | indent
 mkdir ${BUILD_DIR}/backup
 echo "move backup"
