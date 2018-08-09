@@ -21,7 +21,7 @@ echo "-----> Found add-on vco-backup"
 
 #compress actual code
 tar -cvzf /tmp/backup.tgz $1 > /dev/null
-echo "create the dir"
+echo "create the dir" | indent
 mkdir ${BUILD_DIR}/backup
 echo "move backup"
 mv /tmp/backup.tgz ${BUILD_DIR}/backup/
